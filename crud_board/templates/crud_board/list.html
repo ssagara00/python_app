@@ -7,18 +7,44 @@
 {% block content %}
 <h1>ユーザー一覧</h1>
 
+<a href="{% url 'crud_board:new' %}" class="btn btn-primary btn-sm">追加</a>
+
 <table border="1">
-    <thead>
-        <tr>
-            <td>名前</td>
-            <td>Email</td>
-        </tr>
-    </thead>
-    {% for user in users %}
+  <thead>
     <tr>
-        <td>{{ user.name }}</td>
-        <td>{{ user.email }}</td>
+      <td>名前</td>
+      <td>Email</td>
+      <td></td>
     </tr>
-    {% endfor %}
+  </thead>
+  {% for user in users %}
+  <tr>
+    <td>{{ user.name }}</td>
+    <td>{{ user.email }}</td>
+    <td>
+      <a href="{% url 'crud_board:show' id=user.id %}" class="btn btn-primary btn-sm">詳細</a>
+      <a href="{% url 'crud_board:edit' id=user.id %}" class="btn btn-primary btn-sm">編集</a>
+      <form action="{% url 'crud_board:delete' id=user.id %}" method="post" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger btn-sm">削除</button>
+      </form>
+    </td>
+  </tr>
+  {% endfor %}
 </table>
+{% endblock %}
+
+{% block script %}
+<script>
+    $(function(){
+        $("#btn_del").click(function(){
+            if(confirm("削除しますか？")){
+                //yesの処理（何もぜず進む）
+            }else{
+                //cancelの処理
+                return false;
+            }
+        });
+    })
+</script>
 {% endblock %}
