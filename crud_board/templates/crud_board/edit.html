@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}
+会員の編集
+{% endblock title %}
+
+{% block content %}
+{% if id %}
+    <h3 class="page-header">会員の編集</h3>
+    <form action="{% url 'crud_board:edit' id=id %}" method="post" class="form-horizontal" role="form">
+    {% else %}
+    <h3 class="page-header">会員の登録</h3>
+    <form action="{% url 'crud_board:new' %}" method="post" class="form-horizontal" role="form">
+    {% endif %}
+    {% csrf_token %}
+    <div class="form-group">
+      {{ form.as_p }}
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-primary">送信</button>
+      </div>
+    </div>
+    </form>
+    <a href="{% url 'crud_board:list' %}" class="btn btn-default btn-sm">戻る</a>
+{% endblock %}
