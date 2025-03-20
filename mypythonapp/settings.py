@@ -84,7 +84,7 @@ DATABASES = {
         "HOST": "db",
         "PORT": "3306",
         "TEST": {
-            "MIRROR": "default",
+            "NAME": "test_pythondb",
         },
     }
 }
