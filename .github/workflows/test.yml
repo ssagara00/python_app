@@ -32,8 +32,8 @@ jobs:
 
     - name: Install dependencies
       run: |
-        docker-compose exec web python -m pip install --upgrade pip
-        docker-compose exec web pip install -r requirements.txt
+        docker compose exec web python -m pip install --upgrade pip
+        docker compose exec web pip install -r requirements.txt
       shell: bash
 
     - name: Run tests
