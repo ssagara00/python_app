@@ -2,5 +2,6 @@
 *.log
 *.pyc
 __pycache__/
+crud_board/__pycache__/
 db-volumes/
 db.sqlite3
