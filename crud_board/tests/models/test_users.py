@@ -3,7 +3,7 @@ from django.test import TestCase
 from crud_board.models import User
 
 
-class TestsModels(TestCase):
+class TestUser(TestCase):
 
     def setUp(self):
         self.user = User.objects.create(
