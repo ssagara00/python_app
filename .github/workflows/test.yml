@@ -30,12 +30,6 @@ jobs:
       run: docker compose --file .github/actions/docker-compose.yml up --build -d
       shell: bash
 
-    - name: Install dependencies
-      run: |
-        docker compose exec web python -m pip install --upgrade pip
-        docker compose exec web pip install -r requirements.txt
-      shell: bash
-
     - name: Run tests
       run: docker compose exec web python manage.py test
       shell: bash
