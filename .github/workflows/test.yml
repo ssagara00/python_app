@@ -1,0 +1,36 @@
+name: Run Tests
+
+on:
+  push:
+    branches:
+      - feature/#11_dev
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Build Docker Images
+      run: docker compose --file docker-compose.yml build --progress=plain
+      shell: bash
+
+    - name: Build and run services
+      run: docker compose up --build -d
+      shell: bash
+
+    - name: Install dependencies
+      run: |
+        docker-compose exec app python -m pip install --upgrade pip
+        docker-compose exec app pip install -r requirements.txt
+      shell: bash
+
+    - name: Run tests
+      run: docker compose exec app pytest
+      shell: bash
+
+    - name: Shut down services
+      run: docker compose exec web python manage.py test
+      shell: bash
