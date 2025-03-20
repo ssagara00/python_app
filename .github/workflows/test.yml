@@ -26,9 +26,9 @@ jobs:
       shell: bash
 
     - name: Build and run services
-      run: docker compose --file .github/actions/docker-compose.yml up --build -d
+      run: docker compose --file .github/actions/docker-compose.yml up -d
       shell: bash
 
     - name: Run tests
-      run: docker compose --file .github/actions/docker-compose.yml run web python manage.py test
+      run: docker compose --file .github/actions/docker-compose.yml run web python manage.py test --keepdb
       shell: bash
