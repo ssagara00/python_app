@@ -31,9 +31,5 @@ jobs:
       shell: bash
 
     - name: Run tests
-      run: docker compose exec web python manage.py test
-      shell: bash
-
-    - name: Shut down services
-      run: docker compose down
+      run: docker compose --file .github/actions/docker-compose.yml run web python manage.py test
       shell: bash
