@@ -2,13 +2,16 @@ from django.test import Client, TestCase
 from django.urls import reverse
 
 from crud_board.forms import HouseEstimateForm
-from crud_board.models import HouseEstimate
+from crud_board.models import HouseEstimate, User
 
 
 class TestsHouseEstimateView(TestCase):
 
     def setUp(self):
         self.client = Client()
+        self.user = User.objects.create(
+            name="Test User", email="test@example.com", age=20
+        )
         self.house_estimate = HouseEstimate.objects.create(
             estimate_company="Test Company",
             contact_person="Test Person",

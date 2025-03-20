@@ -1,0 +1,34 @@
+name: Run Tests
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    env:
+      TZ: Asia/Tokyo
+      MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
+      MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
+      MYSQL_USER: ${{ secrets.MYSQL_USER }}
+      MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+      DB_HOST: ${{ secrets.DB_HOST }}
+      DB_PORT: ${{ secrets.DB_PORT }}
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Build Docker Images
+      run: docker compose --file .github/actions/docker-compose.yml build --progress=plain
+      shell: bash
+
+    - name: Build and run services
+      run: docker compose --file .github/actions/docker-compose.yml up -d
+      shell: bash
+
+    - name: Run tests
+      run: docker compose --file .github/actions/docker-compose.yml run web python manage.py test --noinput
+      shell: bash
