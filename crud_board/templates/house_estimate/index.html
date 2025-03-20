@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>家の見積リスト</title>
+</head>
+<body>
+    <h1>家の見積リスト</h1>
+	{% if house_estimates %}
+		<ul>
+			{% for estimate in house_estimates %}
+				<li>{{ estimate }}</li>
+			{% endfor %}
+		</ul>
+	{% else %}
+		該当なし
+	{% endif %}
+</body>
+</html>
