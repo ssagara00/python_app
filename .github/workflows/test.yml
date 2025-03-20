@@ -23,7 +23,7 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Build Docker Images
-      run: docker compose --file docker-compose.yml build --progress=plain
+      run: docker compose --file .github/actions/docker-compose.yml build --progress=plain
       shell: bash
 
     - name: Build and run services
