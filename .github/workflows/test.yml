@@ -27,19 +27,19 @@ jobs:
       shell: bash
 
     - name: Build and run services
-      run: docker compose up --build -d
+      run: docker compose --file .github/actions/docker-compose.yml up --build -d
       shell: bash
 
     - name: Install dependencies
       run: |
-        docker-compose exec app python -m pip install --upgrade pip
-        docker-compose exec app pip install -r requirements.txt
+        docker-compose exec web python -m pip install --upgrade pip
+        docker-compose exec web pip install -r requirements.txt
       shell: bash
 
     - name: Run tests
-      run: docker compose exec app pytest
+      run: docker compose exec web python manage.py test
       shell: bash
 
     - name: Shut down services
-      run: docker compose exec web python manage.py test
+      run: docker compose down
       shell: bash
