@@ -1,13 +1,14 @@
 from django.urls import path
 
-from . import views
+from .views import house_estimate, users
 
 app_name = "crud_board"
 urlpatterns = [
     # 一覧
-    path("", views.list, name="list"),
-    path("new", views.edit, name="new"),
-    path("edit/<int:id>", views.edit, name="edit"),
-    path("show/<int:id>", views.show, name="show"),
-    path("delete/<int:id>", views.delete, name="delete"),
+    path("users", users.list, name="list"),
+    path("users/new", users.edit, name="new"),
+    path("users/edit/<int:id>", users.edit, name="edit"),
+    path("users/show/<int:id>", users.show, name="show"),
+    path("users/delete/<int:id>", users.delete, name="delete"),
+    path("house_estimate/new", house_estimate.new, name="house_estimate_new"),
 ]
