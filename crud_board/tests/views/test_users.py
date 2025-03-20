@@ -4,7 +4,7 @@ from django.urls import reverse
 from crud_board.models import User
 
 
-class TestsViews(TestCase):
+class TestsUsers(TestCase):
     def setUp(self):
         self.client = Client()
         self.user = User.objects.create(
@@ -15,13 +15,13 @@ class TestsViews(TestCase):
         """GET メソッドでアクセスしてステータスコード200を返されることを確認"""
         response = self.client.get(reverse("crud_board:list"))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, "crud_board/list.html")
+        self.assertTemplateUsed(response, "users/list.html")
         self.assertContains(response, "Test User")
 
     def test_edit_view_get(self):
         response = self.client.get(reverse("crud_board:edit", args=[self.user.id]))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, "crud_board/edit.html")
+        self.assertTemplateUsed(response, "users/edit.html")
         self.assertContains(response, "Test User")
 
     def test_edit_view_post(self):
@@ -42,7 +42,7 @@ class TestsViews(TestCase):
     def test_show_view(self):
         response = self.client.get(reverse("crud_board:show", args=[self.user.id]))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, "crud_board/show.html")
+        self.assertTemplateUsed(response, "users/show.html")
         self.assertContains(response, "Test User")
 
     def tearDown(self):

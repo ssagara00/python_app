@@ -25,7 +25,7 @@ def edit(request, id=None):
         if form.is_valid():
             user = form.save(commit=False)
             user.save()
-            return redirect("users:list")
+            return redirect("crud_board:list")
     else:
         form = UserForm(instance=user)
 
@@ -37,7 +37,7 @@ def delete(request, id):
     user = get_object_or_404(User, pk=id)
     if request.method == "POST":
         user.delete()
-        return redirect("users:list")
+        return redirect("crud_board:list")
 
 
 def show(request, id=id):
